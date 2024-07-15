@@ -1,6 +1,6 @@
 from datetime import datetime
 from decimal import Decimal
-from bson import Decimal128
+#from bson import Decimal128
 from pydantic import UUID4, BaseModel, Field, model_validator
 
 
@@ -17,7 +17,7 @@ class OutSchema(BaseModel):
     @model_validator(mode="before")
     def set_schema(cls, data):
         for key, value in data.items():
-            if isinstance(value, Decimal128):
+            if isinstance(value, Decimal):
                 data[key] = Decimal(str(value))
 
         return data

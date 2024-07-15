@@ -1,6 +1,8 @@
 from decimal import Decimal
 from typing import Annotated, Optional
-from bson import Decimal128
+
+from decimal import Decimal
+#from bson import Decimal128
 from pydantic import AfterValidator, Field
 from store.schemas.base import BaseSchemaMixin, OutSchema
 
@@ -21,7 +23,7 @@ class ProductOut(ProductIn, OutSchema):
 
 
 def convert_decimal_128(v):
-    return Decimal128(str(v))
+    return Decimal(str(v))
 
 
 Decimal_ = Annotated[Decimal, AfterValidator(convert_decimal_128)]
